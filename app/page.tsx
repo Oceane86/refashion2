@@ -118,12 +118,12 @@ export default function Home() {
 
       </main>
       {/* Filtres fixes centrés en bas avec fond autour du contenu uniquement */}
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-white px-4 py-2 rounded-full shadow-md border border-gray-200 max-w-[95%] w-auto overflow-x-auto">
-        <div className="flex justify-center gap-2 whitespace-nowrap">
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-white px-3 py-1.5 rounded-full shadow-md border border-gray-200">
+        <div className="flex justify-center gap-1.5">
           {["Tous", "Réduire", "Réparer", "Réutiliser", "Recycler"].map((label) => (
             <button
               key={label}
-              className={`border border-gray-300 rounded-full px-4 py-1 text-sm transition ${label === "Tous" ? "bg-gray-100" : "hover:bg-gray-100"
+              className={`border border-gray-300 rounded-full px-2 py-0.5 text-xs transition ${label === "Tous" ? "bg-gray-100" : "hover:bg-gray-100"
                 }`}
             >
               {label}
@@ -131,6 +131,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+
 
 
 
