@@ -1,10 +1,12 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
       <Navbar />
 
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-[280px_1fr]">
@@ -46,20 +48,35 @@ export default function Home() {
 
           {/* Choix de parcours */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {/* Parcours particulier */}
-            <Link href="/formulaire-etape1">
-              <div className="bg-[#FF6B41] rounded-2xl p-6 text-white h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Je veux réparer un vêtement</h2>
-                  <p className="mb-4 text-sm">
-                    Vous avez un vêtement à réparer ? Découvrez comment le faire vous-même ou trouvez un atelier près de chez vous.
-                  </p>
+
+            {/* Parcours de tri */}
+            <Link href="#">
+              <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                <div className="flex items-center justify-between gap-4">
+                  <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se transforme !</h2>
+                  <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
+                    Je démarre mon tri
+                  </button>
                 </div>
-                <button className="bg-black text-white text-sm font-semibold py-3 px-5 rounded-full self-start mt-4">
-                  Commencer
-                </button>
               </div>
             </Link>
+
+            {/* Parcours particulier */}
+            <Link href="/formulaire-etape1">
+              <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                <div className="flex items-center justify-between gap-4">
+                  <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se répare</h2>
+                  <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
+                    Je répare
+                  </button>
+                </div>
+              </div>
+            </Link>
+
+
+
+
+
 
             {/* Parcours pro */}
             <Link href="/pro/creer-atelier">
@@ -103,7 +120,7 @@ export default function Home() {
 
               {/* CTA émission */}
               <div>
-                <button className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
+                <button className="flex items-center gap-2 mt-3 bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
                   Je découvre l’émission <span className="text-lg">→</span>
                 </button>
               </div>

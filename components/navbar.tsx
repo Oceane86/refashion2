@@ -37,7 +37,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-10 bg-white px-4 py-4 flex justify-between items-center shadow-sm">
+    <header className="sticky top-0 z-10 bg-[#FAF4F2] px-4 py-4 flex justify-between items-center shadow-sm">
       <Link href="/" className="font-bold text-xl">
         <span className="font-sans">Re_fashion</span>
       </Link>

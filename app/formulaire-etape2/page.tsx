@@ -1,3 +1,5 @@
+// app/formulaire-etape3/page.tsx
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -15,6 +17,9 @@ interface Atelier {
   title: string
   image: string
   date: string
+  heure: string
+  duree: number
+  participant: number
   address: string
   acceptedTypes: string[]
   acceptedDefauts: string[]
@@ -27,9 +32,12 @@ interface Atelier {
 const ateliers: Atelier[] = [
   {
     id: 1,
-    title: "Atelier Re_fashion Paris Centre",
-    image: "/placeholder.svg?height=300&width=600&text=Atelier+Paris+Centre",
-    date: "Samedi 15 juin 2024, 14h00 - 17h00",
+    title: "Retoucherie de Port-Royal",
+    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Paris+Centre",
+    date: "Samedi 15 juin 2024",
+    heure: "10h00 - 17h00",
+    duree: 1,
+    participant: 10,
     address: "12 rue de la Mode, 75001 Paris",
     acceptedTypes: ["Pantalon", "Jeans", "Short"],
     acceptedDefauts: ["Déchirure", "Ourlet défait", "Fermeture éclair cassée"],
@@ -41,8 +49,11 @@ const ateliers: Atelier[] = [
   {
     id: 2,
     title: "Atelier Couture Express",
-    image: "/placeholder.svg?height=300&width=600&text=Atelier+Couture+Express",
+    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Couture+Express",
     date: "Dimanche 16 juin 2024, 10h00 - 13h00",
+    heure: "10h00 - 13h00",
+    duree: 3,
+    participant: 5,
     address: "45 avenue des Tissus, 75011 Paris",
     acceptedTypes: ["Chemise", "T-shirt", "Blouse"],
     acceptedDefauts: ["Bouton manquant", "Couture défaite", "Trou"],
@@ -54,8 +65,11 @@ const ateliers: Atelier[] = [
   {
     id: 3,
     title: "Atelier Chaussures Nouvelles",
-    image: "/placeholder.svg?height=300&width=600&text=Atelier+Chaussures",
-    date: "Mercredi 19 juin 2024, 18h00 - 20h00",
+    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Chaussures",
+    date: "Mercredi 19 juin 2024",
+    heure: "18h00 - 20h00",
+    duree: 2,
+    participant: 8,
     address: "8 boulevard du Cuir, 75015 Paris",
     acceptedTypes: ["Chaussures", "Bottes", "Sandales"],
     acceptedDefauts: ["Usure", "Déchirure"],
@@ -67,8 +81,11 @@ const ateliers: Atelier[] = [
   {
     id: 4,
     title: "Atelier Vestes & Manteaux",
-    image: "/placeholder.svg?height=300&width=600&text=Atelier+Vestes",
-    date: "Samedi 22 juin 2024, 14h00 - 18h00",
+    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Vestes",
+    date: "Samedi 22 juin 2024",
+    heure: "14h00 - 17h00",
+    duree: 4,
+    participant: 12,
     address: "23 rue du Textile, 75004 Paris",
     acceptedTypes: ["Veste", "Manteau", "Blouson"],
     acceptedDefauts: ["Bouton manquant", "Doublure déchirée", "Fermeture éclair cassée"],
@@ -80,8 +97,11 @@ const ateliers: Atelier[] = [
   {
     id: 5,
     title: "Atelier Tous Textiles",
-    image: "/placeholder.svg?height=300&width=600&text=Atelier+Tous+Textiles",
-    date: "Dimanche 23 juin 2024, 11h00 - 16h00",
+    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Tous+Textiles",
+    date: "Dimanche 23 juin 2024",
+    heure: "10h00 - 13h00",
+    duree: 3,
+    participant: 15,
     address: "56 avenue de la Couture, 75009 Paris",
     acceptedTypes: ["Robe", "Jupe", "Écharpe", "Autre"],
     acceptedDefauts: ["Trou", "Déchirure", "Ourlet défait", "Autre"],
@@ -133,9 +153,11 @@ export default function FormulaireEtape2() {
 
     // Afficher la notification après un court délai
     setTimeout(() => {
-      setShowConfirmation(false)
-      setShowNotification(true)
-    }, 800)
+    setShowConfirmation(false);
+    setShowNotification(true);
+
+    router.push(`/formulaire-etape3`);
+  }, 800); 
   }
 
   const handleNotificationClose = () => {
@@ -161,7 +183,7 @@ export default function FormulaireEtape2() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
       <Navbar />
 
       {/* Notification */}
@@ -173,7 +195,7 @@ export default function FormulaireEtape2() {
 
       <main className="flex-grow px-4 pb-8">
         <div className="mt-6 mb-8">
-          <h1 className="text-2xl font-bold mb-4">Ateliers de réparation près de chez vous</h1>
+          <h1 className="text-2xl font-bold mb-4">On a pensé à vous : un atelier sympa pour apprendre à réparer votre vêtement, sans stress !</h1>
           <p className="text-gray-700 mb-4">
             {noAtelierFound
               ? "Nous n'avons pas trouvé d'atelier correspondant exactement à vos critères."
@@ -210,9 +232,8 @@ export default function FormulaireEtape2() {
             {filteredAteliers.map((atelier) => (
               <div
                 key={atelier.id}
-                className={`bg-white rounded-xl shadow-md overflow-hidden border transition-all ${
-                  selectedAtelier?.id === atelier.id ? "border-black" : "border-gray-100 hover:border-gray-300"
-                }`}
+                className={`bg-[#FF6235] rounded-xl shadow-md overflow-hidden border transition-all ${selectedAtelier?.id === atelier.id ? "border-black" : "border-gray-100 hover:border-gray-300"
+                  }`}
                 onClick={() => selectAtelier(atelier)}
               >
                 <div className="relative h-48 w-full">
@@ -228,29 +249,17 @@ export default function FormulaireEtape2() {
                   <h2 className="font-bold text-xl mb-2">{atelier.title}</h2>
 
                   <div className="mb-3">
-                    <p className="text-gray-700 font-medium">Date et heure:</p>
-                    <p className="text-gray-900">{atelier.date}</p>
-                  </div>
-
-                  <div className="mb-3">
-                    <p className="text-gray-700 font-medium flex items-center">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      <span>{atelier.address}</span>
+                    <p className="bg-white text-black border border-white p-2 inline-block rounded-lg mr-8">
+                      {atelier.date}
+                    </p>
+                    <p className="bg-white text-black border border-white p-2 inline-block rounded-lg">
+                      {atelier.heure}
                     </p>
                   </div>
 
-                  <div className="mb-3">
-                    <p className="text-gray-700 font-medium">Description:</p>
-                    <p className="text-gray-600">{atelier.description}</p>
-                  </div>
-
-                  <div className="mb-3">
-                    <p className="text-gray-700 font-medium">Prix:</p>
-                    <p className="text-gray-900 font-bold">{atelier.prix} € par personne</p>
-                  </div>
 
                   <div>
-                    <p className="text-gray-700 font-medium flex items-center">
+                    <p className="text-black font-medium flex items-center mb-3">
                       <Tag className="h-4 w-4 mr-2" />
                       Types de vêtements acceptés:
                     </p>
@@ -258,15 +267,45 @@ export default function FormulaireEtape2() {
                       {atelier.acceptedTypes.map((type, index) => (
                         <span
                           key={index}
-                          className={`px-3 py-1 rounded-full text-sm ${
-                            type === vetement ? "bg-black text-white" : "bg-gray-100 text-gray-800"
-                          }`}
+                          className={`px-3 py-1 rounded-full text-sm ${type === vetement ? "bg-black text-white" : "bg-white text-black"
+                            }`}
                         >
                           {type}
                         </span>
                       ))}
                     </div>
                   </div>
+
+                  <div className="mb-3 mt-4">
+                    <p className="bg-white text-black border border-white p-2 rounded-lg w-full block text-left">
+                      {atelier.participant} personnes
+                    </p>
+                  </div>
+
+
+
+                  <div className="mb-3">
+                    <p className="bg-white text-black border border-white p-2 rounded-lg w-full block text-left">{atelier.prix} € par personne</p>
+                  </div>
+
+                  <div className="mb-3">
+                    <p className="bg-white text-black border border-white p-2 rounded-lg w-full block text-left">{atelier.description}</p>
+                  </div>
+
+
+
+                  <div className="mb-3">
+                    <p className="bg-white text-black border border-white p-2 rounded-lg w-full block text-left font-medium flex items-center">
+                      <MapPin className="h-4 w-4 mr-2" />
+                      <span>{atelier.address}</span>
+                    </p>
+                  </div>
+
+
+
+
+
+
                 </div>
               </div>
             ))}
@@ -289,6 +328,7 @@ export default function FormulaireEtape2() {
                 </div>
               ) : selectedAtelier ? (
                 "Je participe"
+
               ) : (
                 "Sélectionnez un atelier"
               )}

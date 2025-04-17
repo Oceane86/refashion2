@@ -107,30 +107,28 @@ export default function FormulaireEtape1() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
       <Navbar />
 
       <main className="flex-grow px-4 pb-20">
         <div className="mt-6 mb-8">
-          <h1 className="text-2xl font-bold mb-4">Questionnaire de réparation</h1>
-          <p className="text-gray-700">
-            Pour vous aider à donner une seconde vie à vos vêtements, nous avons besoin de quelques informations.
-            Répondez aux questions suivantes pour que nous puissions vous proposer la meilleure solution.
-          </p>
+          <h1 className="text-2xl font-bold mb-4">On vous pose quelques questions pour trouver ensemble la solution la plus adaptée !</h1>
         </div>
 
         <div className="space-y-6">
           {/* Type de vêtement */}
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
-            <h3 className="font-semibold mb-3">Quel type de vêtement souhaitez-vous réparer ?</h3>
+          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+            <h3 className="text-xl font-semibold mb-3">Quel est ton produit ?</h3>
+            <p className="text-sm text-black mb-3">Répondre à la question</p>
+
             <div className="relative">
               <select
-                className="w-full p-3 border border-gray-300 rounded-lg appearance-none pr-10 bg-white"
+                className="w-full p-3 rounded-lg appearance-none pr-10 bg-black text-white"
                 value={vetement}
                 onChange={(e) => setVetement(e.target.value)}
               >
                 <option value="" disabled>
-                  Sélectionnez un type de vêtement
+                  Répondre à la question
                 </option>
                 {vetementTypes.map((type, index) => (
                   <option key={index} value={type}>
@@ -139,46 +137,23 @@ export default function FormulaireEtape1() {
                 ))}
               </select>
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </div>
-            </div>
-          </div>
-
-          {/* Type de défaut */}
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
-            <h3 className="font-semibold mb-3">Quel est le défaut que vous souhaitez réparer ?</h3>
-            <div className="relative">
-              <select
-                className="w-full p-3 border border-gray-300 rounded-lg appearance-none pr-10 bg-white"
-                value={defaut}
-                onChange={(e) => setDefaut(e.target.value)}
-              >
-                <option value="" disabled>
-                  Sélectionnez un type de défaut
-                </option>
-                {defautTypes.map((type, index) => (
-                  <option key={index} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
+                <ChevronDown className="h-5 w-5 text-white" />
               </div>
             </div>
           </div>
 
           {/* Type de matière */}
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
-            <h3 className="font-semibold mb-3">Quelle est la matière du vêtement ?</h3>
+          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+            <h3 className="text-xl font-semibold mb-3">Quel est la matière de ton produit ?</h3>
+            <p className="text-sm text-black mb-3">Répondre à la question</p>
             <div className="relative">
               <select
-                className="w-full p-3 border border-gray-300 rounded-lg appearance-none pr-10 bg-white"
+                className="w-full p-3 rounded-lg appearance-none pr-10 bg-black text-white"
                 value={matiere}
                 onChange={(e) => setMatiere(e.target.value)}
               >
                 <option value="" disabled>
-                  Sélectionnez un type de matière
+                  Répondre à la question
                 </option>
                 {matiereTypes.map((type, index) => (
                   <option key={index} value={type}>
@@ -187,29 +162,59 @@ export default function FormulaireEtape1() {
                 ))}
               </select>
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
+                <ChevronDown className="h-5 w-5 text-white" />
               </div>
             </div>
           </div>
+
+          {/* Type de défaut */}
+          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+            <h3 className="text-xl font-semibold text-black mb-1">
+              Quel est le défaut que vous souhaitez réparer ?
+            </h3>
+            <p className="text-sm text-black mb-3">Répondre à la question</p>
+
+            <div className="relative">
+              <select
+                className="w-full p-3 rounded-lg appearance-none pr-10 bg-black text-white"
+                value={defaut}
+                onChange={(e) => setDefaut(e.target.value)}
+              >
+                <option value="" disabled>
+                  Répondre à la question
+                </option>
+                {defautTypes.map((type, index) => (
+                  <option key={index} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <ChevronDown className="h-5 w-5 text-white" />
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </main>
 
       {/* Bouton de validation fixe en bas */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white p-4 shadow-md transition-transform duration-300 ${
-          showButton ? "translate-y-0" : "translate-y-full"
-        }`}
+        className={`fixed bottom-0 left-0 right-0 bg-white p-4 shadow-md z-50`}
       >
         <button
           onClick={handleSubmit}
-          className={`w-full font-medium py-3 rounded-full ${
-            isFormValid ? "bg-black text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"
-          }`}
+          className={`w-full font-medium py-3 rounded-full ${isFormValid ? "bg-black text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"}`}
           disabled={!isFormValid}
         >
           Valider
         </button>
       </div>
+
+
+
+
     </div>
   )
 }
