@@ -84,16 +84,16 @@ export default function Home() {
             {/* Parcours pro — affiché uniquement si tab actif = pro */}
             {activeTab === 'pro' && (
               <Link href="/auth/login">
-              <div className="bg-[#2BB673] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-xl font-bold max-w-[60%]">Créer mon évènement !</h2>
-                  <button className="bg-black text-white text-sm font-semibold py-3 px-5 rounded-full">
-                    Créer
-                  </button>
+                <div className="bg-[#2BB673] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                  <div className="flex items-center justify-between gap-4">
+                    <h2 className="text-xl font-bold max-w-[60%]">Créer mon évènement !</h2>
+                    <button className="bg-black text-white text-sm font-semibold py-3 px-5 rounded-full">
+                      Créer
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-            
+              </Link>
+
             )}
           </div>
 
@@ -123,10 +123,17 @@ export default function Home() {
 
               {/* CTA émission */}
               <div>
-                <button className="flex items-center gap-2 mt-3 bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
-                  Je découvre l’émission <span className="text-lg">→</span>
-                </button>
+                <a
+                  href="https://refashion.fr/on-refait-la-mode"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="flex items-center gap-2 mt-3 bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
+                    Je découvre l’émission <span className="text-lg">→</span>
+                  </button>
+                </a>
               </div>
+
             </div>
           </div>
         </div>
