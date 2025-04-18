@@ -86,7 +86,7 @@ export default function Register() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
       <Navbar />
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
