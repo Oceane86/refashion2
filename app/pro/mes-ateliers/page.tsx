@@ -112,7 +112,7 @@ export default function MesAteliers() {
                   <div className="md:flex">
                     <div className="md:w-1/3 relative h-48 md:h-auto">
                       <Image
-                        src={atelier.image || "/placeholder.svg"}
+                        src={atelier.image || "/Photo.svg"}
                         alt={atelier.titre}
                         fill
                         className="object-cover"
@@ -131,7 +131,7 @@ export default function MesAteliers() {
                         <div className="flex space-x-2">
                           <button
                             className="text-gray-500 hover:text-black"
-                            onClick={() => alert("Fonctionnalité d'édition à implémenter")}
+                            onClick={() => alert("Fonctionnalité bientôt disponible")}
                           >
                             <Edit className="h-5 w-5" />
                           </button>
