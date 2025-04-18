@@ -70,7 +70,7 @@ export default function MesAteliers() {
             <button
               onClick={() => setFilter("à venir")}
               className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                filter === "à venir" ? "bg-black text-white" : "bg-gray-100 text-gray-800"
+                filter === "à venir" ? "bg-black text-white" : "bg-white text-gray-800"
               }`}
             >
               À venir
@@ -78,7 +78,7 @@ export default function MesAteliers() {
             <button
               onClick={() => setFilter("complet")}
               className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                filter === "complet" ? "bg-black text-white" : "bg-gray-100 text-gray-800"
+                filter === "complet" ? "bg-black text-white" : "bg-white text-gray-800"
               }`}
             >
               Complets
@@ -86,7 +86,7 @@ export default function MesAteliers() {
             <button
               onClick={() => setFilter("terminé")}
               className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                filter === "terminé" ? "bg-black text-white" : "bg-gray-100 text-gray-800"
+                filter === "terminé" ? "bg-black text-white" : "bg-white text-gray-800"
               }`}
             >
               Terminés
@@ -130,13 +130,13 @@ export default function MesAteliers() {
                         <h2 className="font-bold text-xl mb-2">{atelier.titre}</h2>
                         <div className="flex space-x-2">
                           <button
-                            className="text-gray-500 hover:text-black"
+                            className="text-black hover:text-black"
                             onClick={() => alert("Fonctionnalité bientôt disponible")}
                           >
                             <Edit className="h-5 w-5" />
                           </button>
                           <button
-                            className="text-gray-500 hover:text-red-500"
+                            className="text-black hover:text-red-500"
                             onClick={() => deleteAtelier(atelier.id)}
                           >
                             <Trash2 className="h-5 w-5" />
@@ -145,19 +145,19 @@ export default function MesAteliers() {
                       </div>
 
                       <div className="space-y-2 mb-4">
-                        <div className="flex items-center text-gray-700">
+                        <div className="flex items-center text-black">
                           <Calendar className="h-4 w-4 mr-2" />
                           <span>{atelier.date}</span>
                         </div>
-                        <div className="flex items-center text-gray-700">
+                        <div className="flex items-center text-black">
                           <Clock className="h-4 w-4 mr-2" />
                           <span>{atelier.heure}</span>
                         </div>
-                        <div className="flex items-center text-gray-700">
+                        <div className="flex items-center text-black">
                           <MapPin className="h-4 w-4 mr-2" />
                           <span>{atelier.adresse}</span>
                         </div>
-                        <div className="flex items-center text-gray-700">
+                        <div className="flex items-center text-black">
                           <Users className="h-4 w-4 mr-2" />
                           <span>
                             {atelier.inscrits} / {atelier.capacite} participants
@@ -168,14 +168,14 @@ export default function MesAteliers() {
                       <div className="mb-4">
                         <div className="flex flex-wrap gap-2 mb-2">
                           {atelier.vetementTypes.map((type, index) => (
-                            <span key={index} className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">
+                            <span key={index} className="bg-white text-black px-2 py-1 rounded-full">
                               {type}
                             </span>
                           ))}
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {atelier.defauts.map((defaut, index) => (
-                            <span key={index} className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">
+                            <span key={index} className="bg-white text-black px-2 py-1 rounded-full">
                               {defaut}
                             </span>
                           ))}
@@ -185,7 +185,7 @@ export default function MesAteliers() {
                       <div className="flex justify-between items-center">
                         <div className="font-bold text-lg">{atelier.prix} € / personne</div>
                         <Link href={`#`}>
-                          <button className="bg-black text-white px-4 py-2 rounded-full text-sm">
+                          <button className="bg-black text-white px-4 py-2 rounded-full">
                             Voir les détails
                           </button>
                         </Link>

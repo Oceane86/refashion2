@@ -32,14 +32,14 @@ export default function FormulaireEtape3() {
           <div className="p-4">
             <h2 className="font-bold text-lg text-black mb-2">{atelierTitle}</h2>
             <div className="flex gap-2 mb-2">
-              <p className="bg-white px-3 py-1 rounded-lg text-sm text-black">{date}</p>
+              <p className="bg-white px-3 py-1 rounded-lg text-black">{date}</p>
             </div>
             <div className="flex gap-2">
-              <p className="bg-white px-3 py-1 rounded-lg text-sm text-black flex items-center gap-1">
+              <p className="bg-white px-3 py-1 rounded-lg text-black flex items-center gap-1">
                 <Clock4 className="w-4 h-4" />
                 Heure : {heure}
               </p>
-              <p className="bg-white px-3 py-1 rounded-lg text-sm text-black flex items-center gap-1">
+              <p className="bg-white px-3 py-1 rounded-lg  text-black flex items-center gap-1">
                 <Clock4 className="w-4 h-4" />
                 Durée : {duree}
               </p>

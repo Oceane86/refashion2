@@ -139,13 +139,13 @@ export default function Tutoriel() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
       <Navbar />
 
       <main className="flex-grow px-4 pb-8">
         <div className="mt-4 mb-2">
           <Link href="/formulaire-etape1" className="inline-flex items-center text-gray-600 hover:text-black">
-            <ArrowLeft className="h-4 w-4 mr-1" />
+            <ArrowLeft className="h-4 w-4 mr-1 text-[#FF6235]" />
             <span>Retour</span>
           </Link>
         </div>
@@ -179,7 +179,7 @@ export default function Tutoriel() {
           <ol className="space-y-4">
             {tutoriel.steps.map((step: string, index: number) => (
               <li key={index} className="flex items-start">
-                <div className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
+                <div className="bg-[#FF6235] text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
                   {index + 1}
                 </div>
                 <p>{step}</p>
