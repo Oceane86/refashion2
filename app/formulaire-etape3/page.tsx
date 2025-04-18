@@ -18,7 +18,7 @@ export default function FormulaireEtape3() {
   const imageUrl = "/Photo.svg?height=300&width=600&text=Atelier+Paris+Centre"
 
   return (
-    <div className="min-h-screen bg-[#FAF4F2] flex flex-col">
+    <div className="min-h-screen bg-[#2BB673] flex flex-col">
       <Navbar />
       <main className="p-4 flex-grow flex flex-col items-center">
         <h1 className="text-2xl font-bold mb-4">

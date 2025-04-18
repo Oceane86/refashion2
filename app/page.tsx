@@ -30,7 +30,7 @@ export default function Home() {
             </li>
           </ul>
 
-          <div className="bg-[#FF6B41] text-white rounded-xl p-4 mt-8 flex flex-col justify-between">
+          <div className="bg-[#D2EDFF] text-black rounded-xl p-4 mt-8 flex flex-col justify-between">
             <h3 className="text-lg font-bold mb-3 leading-snug">
               Rien ne se jette, tout se transforme
             </h3>
@@ -55,7 +55,7 @@ export default function Home() {
               <>
                 {/* Parcours de tri */}
                 <Link href="#">
-                  <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                  <div className="bg-[#D2EDFF] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                     <div className="flex items-center justify-between gap-4">
                       <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se transforme !</h2>
                       <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
@@ -67,7 +67,7 @@ export default function Home() {
 
                 {/* Parcours particulier */}
                 <Link href="/formulaire-etape1">
-                  <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                  <div className="bg-[#D2EDFF] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                     <div className="flex items-center justify-between gap-4">
                       <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se répare</h2>
                       <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
@@ -84,7 +84,7 @@ export default function Home() {
             {/* Parcours pro — affiché uniquement si tab actif = pro */}
             {activeTab === 'pro' && (
               <Link href="/auth/login">
-              <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+              <div className="bg-[#2BB673] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                 <div className="flex items-center justify-between gap-4">
                   <h2 className="text-xl font-bold max-w-[60%]">Créer mon évènement !</h2>
                   <button className="bg-black text-white text-sm font-semibold py-3 px-5 rounded-full">
@@ -100,11 +100,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {/* Card Image avec badge */}
             <div className="relative rounded-2xl overflow-hidden bg-[#FFB6C1] shadow-md h-[400px]">
-              <div className="absolute top-4 left-4 bg-yellow-300 px-4 py-1 rounded-full text-sm font-medium z-10">
+              <div className="absolute top-4 left-4 bg-white px-4 py-1 rounded-full text-sm font-medium z-10">
                 On refait la mode
               </div>
               <Image
-                src="https://refashion.fr/app/uploads/2025/04/portrait_1000x1500_orlm-1380x1096-c-top.webp"
+                src="/Pictures.webp"
                 alt="On refait la mode"
                 fill
                 className="object-cover"

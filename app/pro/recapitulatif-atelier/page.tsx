@@ -85,7 +85,7 @@ export default function RecapitulatifAtelier() {
                         <h1 className="text-2xl font-bold">Voici un récapitulatif de votre événement !</h1>
                     </div>
 
-                    <div className="rounded-xl overflow-hidden bg-[#FF7A5A] shadow-md">
+                    <div className="rounded-xl overflow-hidden bg-[#D2EDFF] shadow-md">
                         {/* Image de l'atelier */}
                         <div className="relative h-48 w-full">
                             <Image

@@ -119,7 +119,7 @@ export default function FormulaireEtape1() {
 
         <div className="space-y-6">
           {/* Type de vêtement */}
-          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+          <div className="bg-[#FFC3C3] rounded-xl shadow-md p-4">
             <h3 className="text-xl font-semibold mb-3">Quel est ton produit ?</h3>
             <p className="text-sm text-black mb-3">Répondre à la question</p>
 
@@ -145,7 +145,7 @@ export default function FormulaireEtape1() {
           </div>
 
           {/* Type de matière */}
-          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+          <div className="bg-[#FFC3C3] rounded-xl shadow-md p-4">
             <h3 className="text-xl font-semibold mb-3">Quel est la matière de ton produit ?</h3>
             <p className="text-sm text-black mb-3">Répondre à la question</p>
             <div className="relative">
@@ -170,7 +170,7 @@ export default function FormulaireEtape1() {
           </div>
 
           {/* Type de défaut */}
-          <div className="bg-[#FF6235] rounded-xl shadow-md p-4">
+          <div className="bg-[#FFC3C3] rounded-xl shadow-md p-4">
             <h3 className="text-xl font-semibold text-black mb-1">
               Quel est le défaut que vous souhaitez réparer ?
             </h3>

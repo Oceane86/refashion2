@@ -171,7 +171,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onS
         {activeTab === 'particulier' && (
           <div className="pt-6 space-y-4">
             <ActionCard 
-              bgColor="#FF6B4E" 
+              bgColor="#D2EDFF" 
               textColor="black"
               title="Rien ne se jette, tout se transforme"
               description="Triez, déposez : vos vêtements méritent une seconde chance !"

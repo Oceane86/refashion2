@@ -118,7 +118,7 @@ export default function CreerAtelier() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Date */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Quelle date as-tu prévue ?</h3>
               </div>
               <div
@@ -145,7 +145,7 @@ export default function CreerAtelier() {
 
             {/* Heure */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Quelle heure as-tu prévue ?</h3>
               </div>
               <div
@@ -170,30 +170,27 @@ export default function CreerAtelier() {
               )}
             </div>
 
-            {/* Produit */}
-            <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
-                <h3 className="text-black font-medium text-lg">Quel produit souhaites-tu faire réparer ?</h3>
-                <p className="text-black text-sm opacity-80">Une réponse possible.</p>
+             {/* Types de vêtements */}
+             <div className="mb-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quels types de vêtements ?</h3>
               </div>
               <div
                 className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
-                onClick={() => toggleSection("titre")}
+                onClick={() => toggleSection("vetementTypes")}
               >
                 <span>Réponse à la question</span>
-                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.titre ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${openSections.vetementTypes ? "rotate-180" : ""}`}
+                />
               </div>
-              {openSections.titre && (
+              {openSections.vetementTypes && (
                 <div className="p-4 border border-gray-200 rounded-xl mt-2">
-                  <input
-                    type="text"
-                    id="titre"
-                    name="titre"
-                    value={formData.titre}
-                    onChange={handleChange}
-                    placeholder="Ex: Atelier de réparation de jeans"
-                    className="w-full p-3 border border-gray-300 rounded-lg"
-                    required
+                  <TagInput
+                    tags={formData.vetementTypes}
+                    availableTags={vetementTypes}
+                    onTagsChange={(tags) => handleTagsChange("vetementTypes", tags)}
+                    placeholder="Ajouter un type de vêtement..."
                   />
                 </div>
               )}
@@ -201,7 +198,7 @@ export default function CreerAtelier() {
 
             {/* Adresse */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Où se déroulera l'atelier ?</h3>
               </div>
               <div
@@ -227,35 +224,11 @@ export default function CreerAtelier() {
               )}
             </div>
 
-            {/* Types de vêtements */}
-            <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
-                <h3 className="text-black font-medium text-lg">Quels types de vêtements ?</h3>
-              </div>
-              <div
-                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
-                onClick={() => toggleSection("vetementTypes")}
-              >
-                <span>Réponse à la question</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${openSections.vetementTypes ? "rotate-180" : ""}`}
-                />
-              </div>
-              {openSections.vetementTypes && (
-                <div className="p-4 border border-gray-200 rounded-xl mt-2">
-                  <TagInput
-                    tags={formData.vetementTypes}
-                    availableTags={vetementTypes}
-                    onTagsChange={(tags) => handleTagsChange("vetementTypes", tags)}
-                    placeholder="Ajouter un type de vêtement..."
-                  />
-                </div>
-              )}
-            </div>
+           
 
             {/* Types de défauts */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Quels types de défauts ?</h3>
               </div>
               <div
@@ -279,7 +252,7 @@ export default function CreerAtelier() {
 
             {/* Capacité */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Combien de participants ?</h3>
               </div>
               <div
@@ -308,7 +281,7 @@ export default function CreerAtelier() {
 
             {/* Prix */}
             <div className="mb-4">
-              <div className="bg-[#FF7A5A] rounded-xl p-4">
+              <div className="bg-[#FFC3C3] rounded-xl p-4">
                 <h3 className="text-black font-medium text-lg">Quel est le prix par personne ?</h3>
               </div>
               <div

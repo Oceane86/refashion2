@@ -38,7 +38,7 @@ const ateliers: Atelier[] = [
     heure: "10h00 - 17h00",
     duree: 1,
     participant: 10,
-    address: "12 rue de la Mode, 75001 Paris",
+    address: "12 rue de Port-Royal, 75013, Paris",
     acceptedTypes: ["Pantalon", "Jeans", "Short"],
     acceptedDefauts: ["Déchirure", "Ourlet défait", "Fermeture éclair cassée"],
     acceptedMatieres: ["Denim", "Coton", "Polyester"],
@@ -232,7 +232,7 @@ export default function FormulaireEtape2() {
             {filteredAteliers.map((atelier) => (
               <div
                 key={atelier.id}
-                className={`bg-[#FF6235] rounded-xl shadow-md overflow-hidden border transition-all ${selectedAtelier?.id === atelier.id ? "border-black" : "border-gray-100 hover:border-gray-300"
+                className={`bg-[#2BB673] rounded-xl shadow-md overflow-hidden border transition-all ${selectedAtelier?.id === atelier.id ? "border-black" : "border-gray-100 hover:border-gray-300"
                   }`}
                 onClick={() => selectAtelier(atelier)}
               >
