@@ -14,7 +14,7 @@ export default function Home() {
 
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-[280px_1fr]">
         {/* Sidebar gauche */}
-        <aside className="hidden lg:flex flex-col bg-white p-6 border-r border-gray-200 gap-6">
+        <aside className="hidden lg:flex flex-col bg-[#FAF4F2] p-6 border-r border-gray-200 gap-6">
           <ul className="space-y-4 text-sm font-medium">
             <li className="flex items-center gap-2">
               <span>📍</span>
