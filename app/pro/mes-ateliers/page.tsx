@@ -108,7 +108,7 @@ export default function MesAteliers() {
           ) : (
             <div className="space-y-6">
               {filteredAteliers.map((atelier) => (
-                <div key={atelier.id} className="bg-[#FF6235] rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div key={atelier.id} className="bg-[#D2EDFF] rounded-xl shadow-md overflow-hidden border border-gray-100">
                   <div className="md:flex">
                     <div className="md:w-1/3 relative h-48 md:h-auto">
                       <Image
