@@ -83,7 +83,7 @@ export default function Home() {
 
             {/* Parcours pro — affiché uniquement si tab actif = pro */}
             {activeTab === 'pro' && (
-              <Link href="/pro/creer-atelier">
+              <Link href="/auth/login">
               <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                 <div className="flex items-center justify-between gap-4">
                   <h2 className="text-xl font-bold max-w-[60%]">Créer mon évènement !</h2>

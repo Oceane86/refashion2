@@ -1,69 +1,69 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
-import { login } from "@/lib/auth"
-import Navbar from "@/components/navbar"
-import { Eye, EyeOff, LogIn, User, Briefcase } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { login } from "@/lib/auth";
+import Navbar from "@/components/navbar";
+import { Eye, EyeOff, LogIn, User, Briefcase } from "lucide-react";
 
 export default function Login() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirect = searchParams.get("redirect") || "/"
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
-  const [activeTab, setActiveTab] = useState<"user" | "pro">("user")
+  const [activeTab, setActiveTab] = useState<"user" | "pro">("user");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
-  const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
 
     try {
-      const { email, password } = formData
-      const user = login(email, password)
+      const { email, password } = formData;
+      const user = login(email, password);
 
       if (user) {
         // Vérifier si le type de compte correspond à l'onglet sélectionné
         if ((activeTab === "pro" && user.role !== "pro") || (activeTab === "user" && user.role !== "user")) {
-          setError(`Ce compte n'est pas un compte ${activeTab === "pro" ? "professionnel" : "particulier"}`)
-          setIsLoading(false)
-          return
+          setError(`Ce compte n'est pas un compte ${activeTab === "pro" ? "professionnel" : "particulier"}`);
+          setIsLoading(false);
+          return;
         }
 
         // Rediriger vers la page demandée ou la page d'accueil
         if (user.role === "pro") {
-          router.push("/pro/mes-ateliers")
+          router.push("/pro/mes-ateliers");
         } else {
-          router.push(redirect)
+          router.push(redirect);
         }
       } else {
-        setError("Email ou mot de passe incorrect")
+        setError("Email ou mot de passe incorrect");
       }
     } catch (err) {
-      setError("Une erreur est survenue. Veuillez réessayer.")
-      console.error(err)
+      setError("Une erreur est survenue. Veuillez réessayer.");
+      console.error(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
@@ -173,27 +173,9 @@ export default function Login() {
             </p>
           </div>
 
-          {/* Comptes de démonstration */}
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-medium mb-2">Comptes de démonstration :</h3>
-            <div className="space-y-2 text-sm">
-              {activeTab === "pro" ? (
-                <div>
-                  <p>
-                    <strong>Pro :</strong> jean@example.com / password123
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <p>
-                    <strong>Utilisateur :</strong> pierre@example.com / password123
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
+          
         </div>
       </main>
     </div>
-  )
+  );
 }
