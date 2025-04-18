@@ -34,10 +34,18 @@ export default function Home() {
             <h3 className="text-lg font-bold mb-3 leading-snug">
               Rien ne se jette, tout se transforme
             </h3>
-            <button className="bg-black text-white text-sm font-medium py-2 px-4 rounded-full self-start">
-              Je démarre mon tri
-            </button>
+            <a
+              href="https://refashion.fr/trier-mes-vetements"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="self-start"
+            >
+              <button className="bg-black text-white text-sm font-medium py-2 px-4 rounded-full">
+                Je démarre mon tri
+              </button>
+            </a>
           </div>
+
         </aside>
 
         {/* Contenu principal */}
