@@ -54,7 +54,7 @@ export default function Home() {
             {activeTab === 'particulier' && (
               <>
                 {/* Parcours de tri */}
-                <Link href="#">
+                <Link href="https://refashion.fr/trier-mes-vetements">
                   <div className="bg-[#D2EDFF] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                     <div className="flex items-center justify-between gap-4">
                       <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se transforme !</h2>
