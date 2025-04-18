@@ -149,22 +149,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onS
 
       <div className="px-6 py-8 space-y-8">
         <div className="space-y-4">
-          <MenuItem href="/reduire" title="Réduire" large />
-          <MenuItem href="/reparer" title="Réparer" large />
-          <MenuItem href="/reutiliser" title="Réutiliser" large />
-          <MenuItem href="/recycler" title="Recycler" large />
+          <MenuItem href="https://refashion.fr/reduire" title="Réduire" large />
+          <MenuItem href="https://refashion.fr/reparer" title="Réparer" large />
+          <MenuItem href="https://refashion.fr/reutiliser-mes-textiles-et-chaussures" title="Réutiliser" large />
+          <MenuItem href="https://refashion.fr/recycler-mes-vetements-chaussures" title="Recycler" large />
         </div>
 
         <MenuSection title="À la une">
-          <MenuItem href="/medias" title="Médias et actualités" />
+          <MenuItem href="https://refashion.fr/medias-et-actualites" title="Médias et actualités" />
         </MenuSection>
 
         <MenuSection title="Nos outils">
-          <MenuItem href="/nos-tutoriels" title="Nos tutoriels" />
-          <MenuItem href="/kit-jeunesse" title="Kit jeunesse" />
-          <MenuItem href="/faq" title="Foire aux questions" />
-          <MenuItem href="/points-collecte" title="Trouver un point de collecte" />
-          <MenuItem href="/reparateurs" title="Trouver un réparateur" />
+          <MenuItem href="https://refashion.fr/tutorials" title="Nos tutoriels" />
+          <MenuItem href="https://refashion.fr/kit-jeunesse" title="Kit jeunesse" />
+          <MenuItem href="https://faq.refashion.fr/hc/fr" title="Foire aux questions" />
+          <MenuItem href="https://refashion.fr/trouver-un-point-de-collecte" title="Trouver un point de collecte" />
+          <MenuItem href="https://refashion.fr/trouver-un-reparateur" title="Trouver un réparateur" />
         </MenuSection>
 
         {/* Affichage spécifique aux particuliers */}
@@ -176,7 +176,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onS
               title="Rien ne se jette, tout se transforme"
               description="Triez, déposez : vos vêtements méritent une seconde chance !"
               buttonText="Je démarre mon tri"
-              buttonHref="/demarrer-tri"
+              buttonHref="https://refashion.fr/trier-mes-vetements"
             />
 
             <ActionCard 
@@ -184,7 +184,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onS
               textColor="black"
               title="Trouvez un point de collecte à côté de chez vous"
               buttonText="J'explore"
-              buttonHref="/points-collecte"
+              buttonHref="https://refashion.fr/trouver-un-point-de-collecte"
               small
             />
             
@@ -193,7 +193,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onS
               textColor="black"
               title="On refait la mode"
               buttonText="Découvrir"
-              buttonHref="/refait-la-mode"
+              buttonHref="https://refashion.fr/on-refait-la-mode"
               small
             />
           </div>
