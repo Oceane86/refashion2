@@ -51,7 +51,7 @@ const matiereTypes = [
 ]
 
 // Difficulté des réparations
-const difficulteReparations: Record<string, Record<string, string>> = {
+const difficulteReparations: Record<string, { difficulte: string; tutoriel: boolean }> = {
   "Bouton manquant": { difficulte: "facile", tutoriel: true },
   "Ourlet défait": { difficulte: "facile", tutoriel: true },
   "Couture défaite": { difficulte: "facile", tutoriel: true },
@@ -62,6 +62,8 @@ const difficulteReparations: Record<string, Record<string, string>> = {
   Usure: { difficulte: "difficile", tutoriel: false },
   Autre: { difficulte: "variable", tutoriel: false },
 }
+
+
 
 export default function FormulaireEtape1() {
   const router = useRouter()

@@ -1,13 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<'particulier' | 'pro'>('particulier')
+
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
-      <Navbar />
+      <Navbar onSelectTab={setActiveTab} />
 
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-[280px_1fr]">
         {/* Sidebar gauche */}
@@ -48,50 +51,50 @@ export default function Home() {
 
           {/* Choix de parcours */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {activeTab === 'particulier' && (
+              <>
+                {/* Parcours de tri */}
+                <Link href="#">
+                  <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                    <div className="flex items-center justify-between gap-4">
+                      <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se transforme !</h2>
+                      <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
+                        Je démarre mon tri
+                      </button>
+                    </div>
+                  </div>
+                </Link>
 
-            {/* Parcours de tri */}
-            <Link href="#">
+                {/* Parcours particulier */}
+                <Link href="/formulaire-etape1">
+                  <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
+                    <div className="flex items-center justify-between gap-4">
+                      <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se répare</h2>
+                      <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
+                        Je répare
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+
+              </>
+            )}
+
+
+            {/* Parcours pro — affiché uniquement si tab actif = pro */}
+            {activeTab === 'pro' && (
+              <Link href="/pro/creer-atelier">
               <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
                 <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se transforme !</h2>
-                  <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
-                    Je démarre mon tri
+                  <h2 className="text-xl font-bold max-w-[60%]">Créer mon évènement !</h2>
+                  <button className="bg-black text-white text-sm font-semibold py-3 px-5 rounded-full">
+                    Créer
                   </button>
                 </div>
               </div>
             </Link>
-
-            {/* Parcours particulier */}
-            <Link href="/formulaire-etape1">
-              <div className="bg-[#FF6B41] rounded-2xl p-6 text-black h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-lg font-bold max-w-[60%]">Rien ne se jette, tout se répare</h2>
-                  <button className="bg-black text-white text-sm font-semibold py-2 px-6 rounded-full whitespace-nowrap">
-                    Je répare
-                  </button>
-                </div>
-              </div>
-            </Link>
-
-
-
-
-
-
-            {/* Parcours pro */}
-            <Link href="/pro/creer-atelier">
-              <div className="bg-black rounded-2xl p-6 text-white h-full flex flex-col justify-between shadow-md transition-transform hover:scale-[1.02]">
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Je suis un professionnel</h2>
-                  <p className="mb-4 text-sm">
-                    Vous êtes un professionnel de la réparation ? Créez et gérez vos ateliers pour partager votre savoir-faire.
-                  </p>
-                </div>
-                <button className="bg-white text-black text-sm font-semibold py-3 px-5 rounded-full self-start mt-4">
-                  Espace pro
-                </button>
-              </div>
-            </Link>
+            
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -126,32 +129,22 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-
-
-
-
         </div>
-
       </main>
-      {/* Filtres fixes centrés en bas avec fond autour du contenu uniquement */}
+
+      {/* Filtres fixes en bas */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-white px-3 py-1.5 rounded-full shadow-md border border-gray-200">
         <div className="flex justify-center gap-1.5">
           {["Tous", "Réduire", "Réparer", "Réutiliser", "Recycler"].map((label) => (
             <button
               key={label}
-              className={`border border-gray-300 rounded-full px-2 py-0.5 text-xs transition ${label === "Tous" ? "bg-gray-100" : "hover:bg-gray-100"
-                }`}
+              className={`border border-gray-300 rounded-full px-2 py-0.5 text-xs transition ${label === "Tous" ? "bg-gray-100" : "hover:bg-gray-100"}`}
             >
               {label}
             </button>
           ))}
         </div>
       </div>
-
-
-
-
     </div>
   )
 }

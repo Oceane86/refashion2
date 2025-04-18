@@ -4,12 +4,12 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import Navbar from "@/components/navbar"
-import { Calendar, Clock, Tag, Users, DollarSign, PenToolIcon as Tool, Info } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Notification from "@/components/notification"
 import TagInput from "@/components/tag-input"
 import AuthGuard from "@/components/auth-guard"
-import { vetementTypes, matiereTypes, defautTypes } from "@/lib/data"
+import { vetementTypes, defautTypes } from "@/lib/data"
 
 export default function CreerAtelier() {
   const router = useRouter()
@@ -29,6 +29,7 @@ export default function CreerAtelier() {
   })
   const [showNotification, setShowNotification] = useState(false)
   const [isFormValid, setIsFormValid] = useState(false)
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
 
   // Vérifier si le formulaire est valide
   useEffect(() => {
@@ -71,47 +72,119 @@ export default function CreerAtelier() {
     // Ici, vous pourriez envoyer les données à votre API
     console.log("Données de l'atelier:", formData)
 
-    // Afficher la notification
-    setShowNotification(true)
+    // Au lieu d'afficher la notification, rediriger vers la page de récapitulatif
+    // avec les données du formulaire en paramètres d'URL
+    const params = new URLSearchParams()
+    params.append("titre", formData.titre)
+    params.append("date", formData.date)
+    params.append("heure", formData.heure)
+    params.append("adresse", formData.adresse)
+    params.append("vetementTypes", formData.vetementTypes.join(","))
+    params.append("defauts", formData.defauts.join(","))
+    params.append("capacite", formData.capacite)
+    params.append("prix", formData.prix)
+
+    router.push(`/pro/recapitulatif-atelier?${params.toString()}`)
   }
 
-  const handleNotificationClose = () => {
-    setShowNotification(false)
-    // Rediriger vers la page d'accueil
-    router.push("/pro/mes-ateliers")
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }))
   }
 
   return (
     <AuthGuard requireAuth requirePro>
-      <div className="flex flex-col min-h-screen bg-white">
+      <div className="flex flex-col min-h-screen bg-[#F9F5F0]">
         <Navbar />
 
         {/* Notification */}
         <Notification
           show={showNotification}
           message="Votre atelier a été créé avec succès !"
-          onClose={handleNotificationClose}
+          onClose={() => setShowNotification(false)}
         />
 
-        <main className="flex-grow px-4 pb-8">
+        <main className="flex-grow px-4 pb-8 max-w-md mx-auto">
           <div className="mt-6 mb-8">
-            <h1 className="text-2xl font-bold mb-4">Créer un atelier de réparation</h1>
-            <p className="text-gray-700">
-              Partagez votre expertise en créant un atelier de réparation. Remplissez le formulaire ci-dessous pour
-              proposer votre atelier aux utilisateurs.
+            <h1 className="text-2xl font-bold mb-2">Re_fashion</h1>
+            <p className="text-black text-xl font-medium leading-tight">
+              Vous avez une expertise à partager ? Dites-nous ce que vous aimeriez faire apprendre aux autres pendant
+              l'atelier.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Informations générales */}
-            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-              <h2 className="text-lg font-bold mb-4">Informations générales</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Date */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quelle date as-tu prévue ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("date")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.date ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.date && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                    required
+                  />
+                </div>
+              )}
+            </div>
 
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="titre" className="block font-medium mb-1">
-                    Titre de l'atelier
-                  </label>
+            {/* Heure */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quelle heure as-tu prévue ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("heure")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.heure ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.heure && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
+                  <input
+                    type="time"
+                    id="heure"
+                    name="heure"
+                    value={formData.heure}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                    required
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Produit */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quel produit souhaites-tu faire réparer ?</h3>
+                <p className="text-black text-sm opacity-80">Une réponse possible.</p>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("titre")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.titre ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.titre && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
                   <input
                     type="text"
                     id="titre"
@@ -123,45 +196,23 @@ export default function CreerAtelier() {
                     required
                   />
                 </div>
+              )}
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="date" className="block font-medium mb-1 flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="heure" className="block font-medium mb-1 flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      Heure
-                    </label>
-                    <input
-                      type="time"
-                      id="heure"
-                      name="heure"
-                      value={formData.heure}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="adresse" className="block font-medium mb-1">
-                    Adresse complète
-                  </label>
+            {/* Adresse */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Où se déroulera l'atelier ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("adresse")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.adresse ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.adresse && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
                   <input
                     type="text"
                     id="adresse"
@@ -173,33 +224,25 @@ export default function CreerAtelier() {
                     required
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="description" className="block font-medium mb-1">
-                    Description de l'atelier
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Décrivez votre atelier, votre expertise, ce que les participants vont apprendre..."
-                    className="w-full p-3 border border-gray-300 rounded-lg min-h-[100px]"
-                  />
-                </div>
-              </div>
+              )}
             </div>
 
-            {/* Types de réparations */}
-            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-              <h2 className="text-lg font-bold mb-4">Types de réparations proposées</h2>
-
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="vetementTypes" className="block font-medium mb-1 flex items-center">
-                    <Tag className="h-4 w-4 mr-1" />
-                    Types de vêtements
-                  </label>
+            {/* Types de vêtements */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quels types de vêtements ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("vetementTypes")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${openSections.vetementTypes ? "rotate-180" : ""}`}
+                />
+              </div>
+              {openSections.vetementTypes && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
                   <TagInput
                     tags={formData.vetementTypes}
                     availableTags={vetementTypes}
@@ -207,23 +250,23 @@ export default function CreerAtelier() {
                     placeholder="Ajouter un type de vêtement..."
                   />
                 </div>
+              )}
+            </div>
 
-                <div>
-                  <label htmlFor="matieres" className="block font-medium mb-1">
-                    Matières
-                  </label>
-                  <TagInput
-                    tags={formData.matieres}
-                    availableTags={matiereTypes}
-                    onTagsChange={(tags) => handleTagsChange("matieres", tags)}
-                    placeholder="Ajouter une matière..."
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="defauts" className="block font-medium mb-1">
-                    Types de défauts
-                  </label>
+            {/* Types de défauts */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quels types de défauts ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("defauts")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.defauts ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.defauts && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
                   <TagInput
                     tags={formData.defauts}
                     availableTags={defautTypes}
@@ -231,102 +274,66 @@ export default function CreerAtelier() {
                     placeholder="Ajouter un type de défaut..."
                   />
                 </div>
-              </div>
+              )}
             </div>
 
-            {/* Informations pratiques */}
-            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-              <h2 className="text-lg font-bold mb-4">Informations pratiques</h2>
-
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="capacite" className="block font-medium mb-1 flex items-center">
-                      <Users className="h-4 w-4 mr-1" />
-                      Capacité (nombre de personnes)
-                    </label>
-                    <input
-                      type="number"
-                      id="capacite"
-                      name="capacite"
-                      value={formData.capacite}
-                      onChange={handleChange}
-                      min="1"
-                      placeholder="Ex: 10"
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="prix" className="block font-medium mb-1 flex items-center">
-                      <DollarSign className="h-4 w-4 mr-1" />
-                      Prix par personne (€)
-                    </label>
-                    <input
-                      type="number"
-                      id="prix"
-                      name="prix"
-                      value={formData.prix}
-                      onChange={handleChange}
-                      min="0"
-                      step="0.01"
-                      placeholder="Ex: 25.00"
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-medium mb-1 flex items-center">
-                    <Tool className="h-4 w-4 mr-1" />
-                    Matériel fourni
-                  </label>
-                  <div className="flex space-x-4">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="materielFourni"
-                        value="oui"
-                        checked={formData.materielFourni === "oui"}
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Oui, tout le matériel est fourni
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="materielFourni"
-                        value="non"
-                        checked={formData.materielFourni === "non"}
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Non, les participants doivent apporter du matériel
-                    </label>
-                  </div>
-                </div>
-
-                {formData.materielFourni === "non" && (
-                  <div>
-                    <label htmlFor="materielAApporter" className="block font-medium mb-1 flex items-center">
-                      <Info className="h-4 w-4 mr-1" />
-                      Matériel à apporter
-                    </label>
-                    <textarea
-                      id="materielAApporter"
-                      name="materielAApporter"
-                      value={formData.materielAApporter}
-                      onChange={handleChange}
-                      placeholder="Précisez le matériel que les participants doivent apporter"
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                      required={formData.materielFourni === "non"}
-                    />
-                  </div>
-                )}
+            {/* Capacité */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Combien de participants ?</h3>
               </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("capacite")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.capacite ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.capacite && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
+                  <input
+                    type="number"
+                    id="capacite"
+                    name="capacite"
+                    value={formData.capacite}
+                    onChange={handleChange}
+                    min="1"
+                    placeholder="Ex: 10"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                    required
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Prix */}
+            <div className="mb-4">
+              <div className="bg-[#FF7A5A] rounded-xl p-4">
+                <h3 className="text-black font-medium text-lg">Quel est le prix par personne ?</h3>
+              </div>
+              <div
+                className="bg-black text-white rounded-xl p-4 mt-2 flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection("prix")}
+              >
+                <span>Réponse à la question</span>
+                <ChevronDown className={`h-5 w-5 transition-transform ${openSections.prix ? "rotate-180" : ""}`} />
+              </div>
+              {openSections.prix && (
+                <div className="p-4 border border-gray-200 rounded-xl mt-2">
+                  <input
+                    type="number"
+                    id="prix"
+                    name="prix"
+                    value={formData.prix}
+                    onChange={handleChange}
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex: 25.00"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                    required
+                  />
+                </div>
+              )}
             </div>
 
             <button

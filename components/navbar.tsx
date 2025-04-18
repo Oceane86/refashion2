@@ -1,121 +1,272 @@
-"use client"
+import React, { useState } from 'react';
+import { Menu, Search, X, Eye } from 'lucide-react';
 
-import { useState, useEffect } from "react"
-import { Search, Menu, User, LogOut } from "lucide-react"
-import Link from "next/link"
-import { getCurrentUser, logout, isPro, isAuthenticated } from "@/lib/auth"
-import { useRouter } from "next/navigation"
+// Button component
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'default' | 'outline';
+  fullWidth?: boolean;
+  href?: string;
+  onClick?: () => void;
+  icon?: boolean;
+  active?: boolean;
+}
 
-export default function Navbar() {
-  const router = useRouter()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [auth, setAuth] = useState(false)
-  const [isProfessional, setIsProfessional] = useState(false)
-  const [userName, setUserName] = useState("")
+const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'default',
+  fullWidth = false,
+  href,
+  onClick,
+  icon = false,
+  active = false
+}) => {
+  const baseClasses = 'transition-colors duration-200 flex items-center justify-center';
+  const variantClasses = active 
+    ? 'bg-white text-black'
+    : variant === 'outline' 
+      ? 'border border-white text-white hover:bg-white hover:text-black' 
+      : 'bg-black text-white hover:bg-black/90';
+  const sizeClasses = icon ? 'w-10 h-10 p-0' : 'px-6 py-2.5';
+  const widthClasses = fullWidth ? 'flex-1' : '';
+  const classes = `${baseClasses} ${variantClasses} ${sizeClasses} ${widthClasses} rounded-full`;
 
-  useEffect(() => {
-    // Vérifier l'authentification
-    const authStatus = isAuthenticated()
-    setAuth(authStatus)
-
-    if (authStatus) {
-      // Récupérer les informations de l'utilisateur
-      const user = getCurrentUser()
-      if (user) {
-        setUserName(user.name)
-        setIsProfessional(isPro())
-      }
-    }
-  }, [])
-
-  const handleLogout = () => {
-    logout()
-    setIsMenuOpen(false)
-    router.push("/")
-    // Recharger la page pour mettre à jour l'état d'authentification
-    window.location.reload()
+  if (href) {
+    return (
+      <a href={href} className={classes}>
+        {children}
+      </a>
+    );
   }
 
   return (
-    <header className="sticky top-0 z-10 bg-[#FAF4F2] px-4 py-4 flex justify-between items-center shadow-sm">
-      <Link href="/" className="font-bold text-xl">
-        <span className="font-sans">Re_fashion</span>
-      </Link>
+    <button onClick={onClick} className={classes}>
+      {children}
+    </button>
+  );
+};
 
-      <div className="flex items-center space-x-2">
-        <button className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-          <Search className="w-5 h-5 text-white" />
+// ActionCard component
+interface ActionCardProps {
+  bgColor: string;
+  textColor: string;
+  title: string;
+  description?: string;
+  buttonText: string;
+  buttonHref: string;
+  small?: boolean;
+}
+
+const ActionCard: React.FC<ActionCardProps> = ({
+  bgColor,
+  textColor,
+  title,
+  description,
+  buttonText,
+  buttonHref,
+  small = false
+}) => {
+  return (
+    <div 
+      className={`w-full rounded-lg ${small ? 'p-4' : 'p-6'}`} 
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
+      <h2 className={`${small ? 'font-medium mb-2' : 'text-2xl font-bold mb-2'}`}>
+        {title}
+      </h2>
+      {description && <p className="mb-4 text-sm">{description}</p>}
+      <Button 
+        variant="default" 
+        fullWidth 
+        href={buttonHref}
+      >
+        {buttonText}
+      </Button>
+    </div>
+  );
+};
+
+// MenuItem component
+interface MenuItemProps {
+  href: string;
+  title: string;
+  large?: boolean;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ href, title, large = false }) => {
+  return (
+    <a 
+      href={href} 
+      className={`block ${large ? 'text-3xl font-bold' : 'text-lg'} hover:text-[#FF6B4E] transition-colors duration-200`}
+    >
+      {title}
+    </a>
+  );
+};
+
+// MenuSection component
+interface MenuSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const MenuSection: React.FC<MenuSectionProps> = ({ title, children }) => {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-sm uppercase text-gray-400">{title}</h3>
+      <div className="space-y-3">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+// MobileMenu component
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  activeTab: 'particulier' | 'pro';
+  onSelectTab: (tab: 'particulier' | 'pro') => void;
+}
+
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeTab, onSelectTab }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black text-white z-50 overflow-y-auto transition-opacity duration-300 ease-in-out">
+      <div className="px-6 py-4 flex justify-between items-center">
+        <a href="/" className="font-bold text-xl text-white">
+          Re_fashion
+        </a>
+        <button
+          onClick={onClose}
+          className="text-white transition-transform hover:rotate-90 duration-300"
+          aria-label="Close menu"
+        >
+          <X className="w-6 h-6" />
         </button>
-        <div className="relative">
-          <button className="w-10 h-10 flex items-center justify-center" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <Menu className="w-6 h-6" />
-          </button>
+      </div>
 
-          {isMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 border border-gray-200">
-              {auth ? (
-                <>
-                  <div className="px-4 py-2 border-b border-gray-100">
-                    <p className="text-sm font-medium">{userName}</p>
-                    <p className="text-xs text-gray-500">{isProfessional ? "Professionnel" : "Particulier"}</p>
-                  </div>
-                  {isProfessional && (
-                    <>
-                      <Link href="/pro/mes-ateliers">
-                        <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Mes ateliers
-                        </div>
-                      </Link>
-                      <Link href="/pro/creer-atelier">
-                        <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Créer un atelier
-                        </div>
-                      </Link>
-                    </>
-                  )}
-                  <button
-                    className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                    onClick={handleLogout}
-                  >
-                    <div className="flex items-center">
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Se déconnecter
-                    </div>
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link href="/auth/login">
-                    <div
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <div className="flex items-center">
-                        <User className="h-4 w-4 mr-2" />
-                        Se connecter
-                      </div>
-                    </div>
-                  </Link>
-                  <Link href="/auth/register">
-                    <div
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      S'inscrire
-                    </div>
-                  </Link>
-                </>
-              )}
-            </div>
-          )}
+      <div className="px-6 py-8 space-y-8">
+        <div className="space-y-4">
+          <MenuItem href="/reduire" title="Réduire" large />
+          <MenuItem href="/reparer" title="Réparer" large />
+          <MenuItem href="/reutiliser" title="Réutiliser" large />
+          <MenuItem href="/recycler" title="Recycler" large />
+        </div>
+
+        <MenuSection title="À la une">
+          <MenuItem href="/medias" title="Médias et actualités" />
+        </MenuSection>
+
+        <MenuSection title="Nos outils">
+          <MenuItem href="/nos-tutoriels" title="Nos tutoriels" />
+          <MenuItem href="/kit-jeunesse" title="Kit jeunesse" />
+          <MenuItem href="/faq" title="Foire aux questions" />
+          <MenuItem href="/points-collecte" title="Trouver un point de collecte" />
+          <MenuItem href="/reparateurs" title="Trouver un réparateur" />
+        </MenuSection>
+
+        {/* Affichage spécifique aux particuliers */}
+        {activeTab === 'particulier' && (
+          <div className="pt-6 space-y-4">
+            <ActionCard 
+              bgColor="#FF6B4E" 
+              textColor="black"
+              title="Rien ne se jette, tout se transforme"
+              description="Triez, déposez : vos vêtements méritent une seconde chance !"
+              buttonText="Je démarre mon tri"
+              buttonHref="/demarrer-tri"
+            />
+
+            <ActionCard 
+              bgColor="#E8F3F9" 
+              textColor="black"
+              title="Trouvez un point de collecte à côté de chez vous"
+              buttonText="J'explore"
+              buttonHref="/points-collecte"
+              small
+            />
+            
+            <ActionCard 
+              bgColor="#FFE8E8" 
+              textColor="black"
+              title="On refait la mode"
+              buttonText="Découvrir"
+              buttonHref="/refait-la-mode"
+              small
+            />
+          </div>
+        )}
+
+        <div className="flex gap-4 mb-6 pb-8">
+          <Button 
+            variant="outline" 
+            fullWidth 
+            active={activeTab === 'particulier'}
+            onClick={() => onSelectTab('particulier')}
+          >
+            Particulier
+          </Button>
+          <Button 
+            variant="outline" 
+            fullWidth 
+            active={activeTab === 'pro'}
+            onClick={() => onSelectTab('pro')}
+          >
+            Pro
+          </Button>
+          <Button variant="outline" icon>
+            <Eye className="h-4 w-4" />
+          </Button>
         </div>
       </div>
-    </header>
-  )
+    </div>
+  );
+};
+
+interface NavbarProps {
+  onSelectTab?: (tab: 'particulier' | 'pro') => void;
 }
+
+const Navbar: React.FC<NavbarProps> = ({ onSelectTab }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'particulier' | 'pro'>('particulier');
+
+  const handleTabClick = (tab: 'particulier' | 'pro') => {
+    setActiveTab(tab);
+    onSelectTab?.(tab);
+  };
+
+  return (
+    <>
+      <header className="sticky top-0 z-10 bg-[#FAF4F2] px-4 py-4 flex justify-between items-center shadow-sm">
+        <a href="/" className="font-bold text-xl">
+          <span className="font-sans">Re_fashion</span>
+        </a>
+
+        <div className="flex items-center space-x-2">
+          <button className="w-10 h-10 bg-black rounded-full flex items-center justify-center transition-transform hover:scale-105">
+            <Search className="w-5 h-5 text-white" />
+          </button>
+          <button
+            className="w-10 h-10 flex items-center justify-center transition-transform hover:scale-105"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+      </header>
+
+      <MobileMenu 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+        activeTab={activeTab}
+        onSelectTab={handleTabClick}
+      />
+    </>
+  );
+};
+
+export default Navbar;

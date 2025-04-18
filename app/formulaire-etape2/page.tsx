@@ -33,7 +33,7 @@ const ateliers: Atelier[] = [
   {
     id: 1,
     title: "Retoucherie de Port-Royal",
-    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Paris+Centre",
+    image: "/Photo.svg?height=300&width=600&text=Atelier+Paris+Centre",
     date: "Samedi 15 juin 2024",
     heure: "10h00 - 17h00",
     duree: 1,
@@ -49,7 +49,7 @@ const ateliers: Atelier[] = [
   {
     id: 2,
     title: "Atelier Couture Express",
-    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Couture+Express",
+    image: "/Photo.svg?height=300&width=600&text=Atelier+Couture+Express",
     date: "Dimanche 16 juin 2024, 10h00 - 13h00",
     heure: "10h00 - 13h00",
     duree: 3,
@@ -65,7 +65,7 @@ const ateliers: Atelier[] = [
   {
     id: 3,
     title: "Atelier Chaussures Nouvelles",
-    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Chaussures",
+    image: "/Photo.svg?height=300&width=600&text=Atelier+Chaussures",
     date: "Mercredi 19 juin 2024",
     heure: "18h00 - 20h00",
     duree: 2,
@@ -81,7 +81,7 @@ const ateliers: Atelier[] = [
   {
     id: 4,
     title: "Atelier Vestes & Manteaux",
-    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Vestes",
+    image: "/Photo.svg?height=300&width=600&text=Atelier+Vestes",
     date: "Samedi 22 juin 2024",
     heure: "14h00 - 17h00",
     duree: 4,
@@ -97,7 +97,7 @@ const ateliers: Atelier[] = [
   {
     id: 5,
     title: "Atelier Tous Textiles",
-    image: "../assets/img/atelier/Photo.svg?height=300&width=600&text=Atelier+Tous+Textiles",
+    image: "/Photo.svg?height=300&width=600&text=Atelier+Tous+Textiles",
     date: "Dimanche 23 juin 2024",
     heure: "10h00 - 13h00",
     duree: 3,

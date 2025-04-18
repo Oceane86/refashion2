@@ -120,7 +120,7 @@ export default function Tutoriel() {
 
   if (!tutoriel) {
     return (
-      <div className="flex flex-col min-h-screen bg-white">
+      <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
         <Navbar />
         <main className="flex-grow px-4 py-8">
           <div className="text-center max-w-md mx-auto">

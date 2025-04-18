@@ -15,7 +15,7 @@ export default function FormulaireEtape3() {
   const date = searchParams.get("date") || "19.04.2025"
   const heure = searchParams.get("heure") || "14h00"
   const duree = searchParams.get("duree") || "1h00"
-  const imageUrl = "/public/placeholder.svg?height=300&width=600&text=Atelier+Paris+Centre"
+  const imageUrl = "/Photo.svg?height=300&width=600&text=Atelier+Paris+Centre"
 
   return (
     <div className="min-h-screen bg-[#FAF4F2] flex flex-col">

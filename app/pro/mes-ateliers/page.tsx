@@ -40,7 +40,7 @@ export default function MesAteliers() {
 
   return (
     <AuthGuard requireAuth requirePro>
-      <div className="flex flex-col min-h-screen bg-white">
+      <div className="flex flex-col min-h-screen bg-[#FAF4F2]">
         <Navbar />
 
         <main className="flex-grow px-4 pb-8">
@@ -108,7 +108,7 @@ export default function MesAteliers() {
           ) : (
             <div className="space-y-6">
               {filteredAteliers.map((atelier) => (
-                <div key={atelier.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div key={atelier.id} className="bg-[#FF6235] rounded-xl shadow-md overflow-hidden border border-gray-100">
                   <div className="md:flex">
                     <div className="md:w-1/3 relative h-48 md:h-auto">
                       <Image
